@@ -1,0 +1,2 @@
+# ImageDedup
+De-Duplicate images.
