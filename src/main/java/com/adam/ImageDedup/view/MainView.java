@@ -2,6 +2,7 @@ package com.adam.ImageDedup.view;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.FileDialog;
 import java.awt.FlowLayout;
 import java.awt.Graphics;
 import java.awt.GridBagConstraints;
@@ -24,15 +25,24 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.UIManager;
 
+import com.adam.ImageDedup.*;
+
 /*
     The main View for users to select stuff
 */
 public class MainView extends JFrame{
-    public MainView(){
+    private MainViewController ctrl;
+
+    private final JTextField inPath = new JTextField();
+    private final JTextField outPath = new JTextField();
+
+    public MainView(MainViewController mvc){
         super();
+        ctrl = mvc;
         
         setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
-        JPanel dir = initDirChoose();
+        System.setProperty("apple.awt.fileDialogForDirectories", "true"); 
+        JPanel dir = initDirChoose(mvc);
         JPanel algo = initChooseAlgorithm();
 
         GridBagConstraints gbc = new GridBagConstraints();
@@ -50,7 +60,7 @@ public class MainView extends JFrame{
 
         gbc.gridy = 3;
         gbc.gridx = 0;
-        add(initGo());
+        add(initGo(mvc));
 
         // Spacer
         gbc.gridy = 999;
@@ -59,12 +69,17 @@ public class MainView extends JFrame{
         add(new JPanel());
     }
 
-    private JComponent initGo(){
+    private JComponent initGo(MainViewController mvc){
         JPanel p = new JPanel();
         p.setLayout(new BorderLayout());
         p.setMaximumSize(new Dimension(9999999, 200));
 
         JButton go = new JButton("Go");
+        go.addActionListener(e -> {
+            mvc.inputPath = inPath.getText();
+            mvc.outputPath = outPath.getText();
+            mvc.btnBegin();
+        });
         p.add(go, BorderLayout.CENTER);
         return p;
     }
@@ -100,19 +115,17 @@ public class MainView extends JFrame{
         return algo;
     }
 
-    private JPanel initDirChoose(){
+    private JPanel initDirChoose(MainViewController mvc){
         JPanel opts = new JPanel();
         opts.setBorder(BorderFactory.createTitledBorder("Directories"));
         opts.setLayout(new GridBagLayout());
         opts.setMaximumSize(new Dimension(99999999, 200));
 
-        JLabel inLabel = new JLabel("Input Directory:");
-        final JTextField inPath = new JTextField();        
+        JLabel inLabel = new JLabel("Input Directory:");       
         JButton chooseInDir = new JButton("Choose Dir");
         chooseInDir.addActionListener((ActionEvent e) -> {btnInputFile(inPath);});
 
-        JLabel outLabel = new JLabel("Output Directory:");
-        JTextField outPath = new JTextField();        
+        JLabel outLabel = new JLabel("Output Directory:");         
         JButton chooseOutDir = new JButton("Choose Dir");
         chooseOutDir.addActionListener((ActionEvent e) -> {btnInputFile(outPath);});
 
@@ -161,20 +174,20 @@ public class MainView extends JFrame{
 
     private void btnInputFile(JTextField area){
         openFileSelect(area);
+        ctrl.inputPath = area.getText() == null ? "" : area.getText();
     }
 
     private void btnOutputFile(JTextField area){
         openFileSelect(area);
+        ctrl.outputPath = area.getText() == null ? "" : area.getText();
     }
 
     private void openFileSelect(JTextField area){
-        JFileChooser fc = new JFileChooser();
-        fc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-        int ret = fc.showOpenDialog(this);
+        FileDialog dia = new FileDialog(this);
+        dia.setVisible(true);
+        String dir = dia.getDirectory();
 
-        if(ret == JFileChooser.APPROVE_OPTION){
-            // User chose somthing
-            area.setText(fc.getSelectedFile().getAbsolutePath());
-        }
+        if(dir != null && !dir.equals(""))
+            area.setText(dir);
     }
 }

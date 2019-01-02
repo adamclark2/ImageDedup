@@ -20,8 +20,7 @@ public class App
             e.printStackTrace();
         }
 
-
-        MainView mv = new MainView();
+        MainView mv = new MainView(new MainViewController());
         mv.setSize(380, 500);
         mv.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         mv.setTitle("Image Dedup");
