@@ -51,6 +51,12 @@
         <version>2.4</version>
     </dependency>
 
+    <dependency>
+        <groupId>org.openjfx</groupId>
+        <artifactId>javafx-base</artifactId>
+        <version>12-ea+6</version>
+    </dependency>
+
 
     <dependency>
       <groupId>junit</groupId>
