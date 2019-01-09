@@ -5,6 +5,7 @@ import java.math.BigInteger;
 import java.nio.file.*;
 import java.security.MessageDigest;
 import java.util.*;
+import java.util.function.*;
 
 import org.apache.commons.io.FileUtils;
 
@@ -58,32 +59,56 @@ public class HashDedup{
         return bldr.toString();
     }
 
-    public void WriteOutput(String outputDir) throws Exception{
+    private void writeFile(List<File> f, String outputDir, OutputOptions opt, String key) throws Exception{
+        String date = "";
+        if(opt.sortDate){
+            long mod = f.get(0).lastModified();
+            Calendar c = Calendar.getInstance();
+            c.setTimeInMillis(mod);
+            date = c.get(Calendar.YEAR) + File.separator;
+        }
+
+        File out = new File(outputDir + date);
+        if(!out.exists()){
+            out.mkdirs();
+        }
+
+        if(f.size() > 1){
+            out = new File(outputDir + date + key);
+            if(!out.exists()){
+                out.mkdirs();
+            }
+        }
+
+        if(!opt.dirsOnly && f.size() == 1){
+            FileUtils.copyFile(f.get(0), new File(outputDir + date + f.get(0).getName()));
+        }else if(!opt.dirsOnly && f.size() > 1){
+            for(File tmp : f){
+                int sep = 0;
+                File to = new File(outputDir + date + key + File.separator + tmp.getName());
+                while(to.exists()){
+                    to = new File(outputDir + date + key + File.separator + (sep++) + tmp.getName());
+                }
+                FileUtils.copyFile(tmp, to);
+            }
+        }
+    }
+
+    public void WriteOutput(String outputDir, OutputOptions opt, BiConsumer<Double,String> updateFunc) throws Exception{
         File f = new File(outputDir);
         if(!f.exists()){
             f.mkdirs();
         }
 
+        outputDir = outputDir + File.separator;
+        int i = 0;
+        int max = dedup.keySet().size();
         for(String key : dedup.keySet()){
             List<File> files = dedup.get(key);
-            if(files.size() == 1){
-                FileUtils.copyFile(files.get(0), new File(outputDir + "/" + files.get(0).getName()));
-            }else{
-                // Multiple Files
-                f = new File(outputDir + "/" + key);
-                if(!f.exists()){
-                    f.mkdirs();
-
-                    for(File ff : files){
-                        File out = new File(outputDir + "/" + key + "/" + ff.getName());
-                        int idx = 1;
-                        while(out.exists()){
-                            out = new File(outputDir + "/" + key + "/" + (idx++) + ff.getName());
-                        }
-
-                        FileUtils.copyFile(ff, out);
-                    }
-                }
+            writeFile(files, outputDir, opt, key);
+            i++;
+            if(i % 10 == 0){
+                updateFunc.accept((i + 0.0)/max, "" + i + " of " + max);
             }
         }  
     }

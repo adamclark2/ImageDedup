@@ -42,13 +42,17 @@ public class InputManager {
             return;
         }
 
-        if(f.isFile()){
-            if(isImage(f)){
+        if(f.isFile() && isImage(f)){
                 imageFiles.add(f);
-            }
         }else{
             for(File tmp : f.listFiles()){
-                addFileToPath(tmp, ++depth);
+                if(tmp.isDirectory()){
+                    addFileToPath(tmp, ++depth);
+                }else{
+                    if(tmp.isFile() && isImage(tmp)){
+                        imageFiles.add(tmp);
+                    }
+                }
             }
         }
     }

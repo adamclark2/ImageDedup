@@ -10,6 +10,8 @@ import javafx.fxml.*;
 import java.net.*;
 import javafx.scene.control.*;
 import javafx.event.*;
+import javafx.beans.*;
+import javafx.beans.value.*;
 
 import java.io.*;
 
@@ -43,13 +45,20 @@ public class JavaFXMainView {
 
         initButtons();
         initCbox();
-
         initTabs();
     }
 
     private void initTabs(){
         TabPane p = (TabPane) sc.lookup("#TabPane");
         p.getSelectionModel().clearAndSelect(tabIndex);
+        p.getSelectionModel().selectedItemProperty().addListener(
+            new ChangeListener<Tab>() {
+                @Override
+                public void changed(ObservableValue<? extends Tab> ov, Tab t, Tab t1) {
+                    tabIndex = (new Integer(t1.getId().substring(3))) - 1;
+                }
+            }
+        );
 
         Button b = (Button) sc.lookup("#btnNext");
         b.setOnAction(e -> {
@@ -86,12 +95,6 @@ public class JavaFXMainView {
         // Un implemented functionality
         CheckBox cbox = (CheckBox) sc.lookup("#chkExif");
         cbox.setOnAction(notImplemented);
-
-        cbox = (CheckBox) sc.lookup("#chkSortDate");
-        cbox.setOnAction(notImplemented);
-
-        cbox = (CheckBox) sc.lookup("#chkNoCopy");
-        cbox.setOnAction(notImplemented);
     }
 
     public void btnGo(ActionEvent e){
@@ -104,13 +107,12 @@ public class JavaFXMainView {
         mvc.inputPath = in.getText();
         mvc.outputPath = out.getText();
 
-        // Alert user of incomplete stuff
-        Alert a = new Alert(Alert.AlertType.ERROR);
-        a.setTitle("Application Error");
-        a.setHeaderText("Loading bar not implemented yet...");
-        a.show();
+        OutputOptions opt = new OutputOptions();
+        opt.useExifTime = false;
+        opt.sortDate = ((CheckBox) sc.lookup("#chkSortDate")).isSelected();;
+        opt.dirsOnly = ((CheckBox) sc.lookup("#chkNoCopy")).isSelected();
 
-        mvc.btnBegin();
+        mvc.btnBegin(opt,sc);
     }
 
     public void btnInPath(){

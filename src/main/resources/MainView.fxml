@@ -84,8 +84,8 @@
                               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                  <children>
                                     <Label alignment="CENTER" layoutX="300.0" layoutY="105.0" text="All set, press the Go button to start" textAlignment="CENTER" wrapText="true" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-                                    <ProgressBar layoutX="156.0" layoutY="104.0" prefHeight="18.0" prefWidth="317.0" progress="0.86" AnchorPane.leftAnchor="156.0" AnchorPane.rightAnchor="145.39999999999998" AnchorPane.topAnchor="104.0" />
-                                    <Label layoutX="491.0" layoutY="105.0" text="7 of 9" AnchorPane.rightAnchor="106.0" AnchorPane.topAnchor="105.0" />
+                                    <ProgressBar fx:id="progress" layoutX="175.6" layoutY="123.6" prefHeight="18.0" prefWidth="260.0" progress="0.86" AnchorPane.leftAnchor="166.0" AnchorPane.rightAnchor="202.0" AnchorPane.topAnchor="105.0" />
+                                    <Label fx:id="lbProgress" layoutX="491.0" layoutY="105.0" text="9999 of 9999" AnchorPane.rightAnchor="106.0" AnchorPane.topAnchor="105.0" />
                                  </children>
                               </AnchorPane>
                            </content>
