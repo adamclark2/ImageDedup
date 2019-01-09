@@ -18,6 +18,16 @@ public class JavaFXMainView {
     private Scene sc;
     private Stage st;
 
+    private int tabIndex = 0;
+
+    private EventHandler<ActionEvent> notImplemented = e -> {
+        Alert a = new Alert(Alert.AlertType.ERROR);
+        a.setTitle("Application Error");
+        a.setHeaderText("This functionality is not implemented yet...");
+
+        a.showAndWait();
+    };
+
     public JavaFXMainView(MainViewController mvc, Stage s) throws Exception{
         this.mvc = mvc;
         this.st = s;
@@ -31,30 +41,74 @@ public class JavaFXMainView {
 
         s.show();
 
-        Button b = (Button) scene.lookup("#btnGo");
+        initButtons();
+        initCbox();
+
+        initTabs();
+    }
+
+    private void initTabs(){
+        TabPane p = (TabPane) sc.lookup("#TabPane");
+        p.getSelectionModel().clearAndSelect(tabIndex);
+
+        Button b = (Button) sc.lookup("#btnNext");
+        b.setOnAction(e -> {
+            tabIndex = (tabIndex + 1) > 4 ? 3 : tabIndex + 1;
+            p.getSelectionModel().clearAndSelect(tabIndex);
+        });
+
+        b = (Button) sc.lookup("#btnPrevious");
+        b.setOnAction(e -> {
+            tabIndex = (tabIndex - 1) < 0 ? 0 : tabIndex - 1;
+            p.getSelectionModel().clearAndSelect(tabIndex);
+        });
+
+        b = (Button) sc.lookup("#btnExit");
+        b.setOnAction(e -> {
+            System.exit(0);
+        });
+
+
+    }
+
+    private void initButtons(){
+        Button b = (Button) sc.lookup("#btnGo");
         b.setOnAction(e -> this.btnGo(e));
 
-        b = (Button) scene.lookup("#btnInPath");
+        b = (Button) sc.lookup("#btnInPath");
         b.setOnAction(e -> this.btnInPath());
 
-        b = (Button) scene.lookup("#btnOutPath");
+        b = (Button) sc.lookup("#btnOutPath");
         b.setOnAction(e -> this.btnOutPath());
+    }
 
-        CheckBox cbox = (CheckBox) scene.lookup("#chkExif");
-        cbox.setOnAction(e -> {
-            Alert a = new Alert(Alert.AlertType.ERROR);
-            a.setTitle("Application Error");
-            a.setHeaderText("This functionality is not implemented yet...");
+    private void initCbox(){
+        // Un implemented functionality
+        CheckBox cbox = (CheckBox) sc.lookup("#chkExif");
+        cbox.setOnAction(notImplemented);
 
-            a.showAndWait();
-        });
+        cbox = (CheckBox) sc.lookup("#chkSortDate");
+        cbox.setOnAction(notImplemented);
+
+        cbox = (CheckBox) sc.lookup("#chkNoCopy");
+        cbox.setOnAction(notImplemented);
     }
 
     public void btnGo(ActionEvent e){
+        TabPane p = (TabPane) sc.lookup("#TabPane");
+        tabIndex = 3;
+        p.getSelectionModel().clearAndSelect(tabIndex);
+
         TextField in = (TextField) sc.lookup("#tfIn");
         TextField out = (TextField) sc.lookup("#tfOut");
         mvc.inputPath = in.getText();
         mvc.outputPath = out.getText();
+
+        // Alert user of incomplete stuff
+        Alert a = new Alert(Alert.AlertType.ERROR);
+        a.setTitle("Application Error");
+        a.setHeaderText("Loading bar not implemented yet...");
+        a.show();
 
         mvc.btnBegin();
     }
@@ -64,7 +118,9 @@ public class JavaFXMainView {
         File f = dc.showDialog(st);
         
         TextField in = (TextField) sc.lookup("#tfIn");
-        in.setText(f.getAbsolutePath());
+        if(f != null){
+            in.setText(f.getAbsolutePath());
+        }
     }
 
     public void btnOutPath(){
@@ -72,6 +128,8 @@ public class JavaFXMainView {
         File f = dc.showDialog(st);
 
         TextField out = (TextField) sc.lookup("#tfOut");
-        out.setText(f.getAbsolutePath());
+        if(f != null){
+            out.setText(f.getAbsolutePath());
+        }
     }
 }

@@ -4,55 +4,107 @@
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.TitledPane?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.BorderPane?>
 
-
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="598.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.151" xmlns:fx="http://javafx.com/fxml/1">
-   <children>
-      <TitledPane animated="false" collapsible="false" text="Directories">
-        <content>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-               <children>
-                  <TextField fx:id="tfIn" layoutX="122.0" layoutY="24.0" prefHeight="25.0" prefWidth="126.0" AnchorPane.leftAnchor="120.0" AnchorPane.rightAnchor="120.0" AnchorPane.topAnchor="18.0" />
-                  <Label layoutX="24.0" layoutY="18.0" text="Input Directory" AnchorPane.topAnchor="18.0" />
-                  <Label layoutX="24.0" layoutY="69.0" text="Output Directory" AnchorPane.topAnchor="46.0" />
-                  <Button fx:id="btnInPath" layoutX="273.0" layoutY="32.0" mnemonicParsing="false" text="Choose" AnchorPane.rightAnchor="18.0" AnchorPane.topAnchor="18.0" />
-                  <Button fx:id="btnOutPath" layoutX="283.0" layoutY="74.0" mnemonicParsing="false" text="Choose" AnchorPane.rightAnchor="18.0" AnchorPane.topAnchor="46.0" />
-                  <TextField fx:id="tfOut" layoutX="122.0" layoutY="65.0" prefHeight="25.0" prefWidth="126.0" AnchorPane.leftAnchor="120.0" AnchorPane.rightAnchor="120.0" AnchorPane.topAnchor="46.0" />
-               </children>
-            </AnchorPane>
-        </content>
-      </TitledPane>
-      <TitledPane animated="false" collapsible="false" text="Algorithm">
-        <content>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-               <children>
-                  <ComboBox layoutX="14.0" layoutY="14.0" prefHeight="25.0" prefWidth="557.0" promptText="Hash" AnchorPane.leftAnchor="18.0" AnchorPane.rightAnchor="18.0" AnchorPane.topAnchor="18.0" />
-                  <Label layoutX="28.0" layoutY="62.0" prefHeight="45.0" prefWidth="541.0" text="Blurb About the algorithm goes here ....... ...................... ........................ ................................ ....................... .............. ......................................................................" wrapText="true" AnchorPane.bottomAnchor="18.0" AnchorPane.leftAnchor="18.0" AnchorPane.rightAnchor="18.0" AnchorPane.topAnchor="52.0" />
-               </children>
-            </AnchorPane>
-        </content>
-      </TitledPane>
-      <TitledPane animated="false" collapsible="false" text="Advanced">
-        <content>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-               <children>
-                  <CheckBox fx:id="chkExif" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" text="Change file modification time to exif" />
-               </children>
-            </AnchorPane>
-        </content>
-      </TitledPane>
-      <TitledPane animated="false" collapsible="false" text="Go">
-        <content>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-               <children>
-                  <Button fx:id="btnGo" layoutX="13.0" layoutY="25.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="572.0" text="Go" AnchorPane.leftAnchor="13.0" AnchorPane.rightAnchor="13.0" AnchorPane.topAnchor="25.0" />
-               </children>
-            </AnchorPane>
-        </content>
-      </TitledPane>
-   </children>
-</VBox>
+<BorderPane prefHeight="336.0" prefWidth="630.0" xmlns="http://javafx.com/javafx/8.0.151" xmlns:fx="http://javafx.com/fxml/1">
+   <center>
+      <TabPane fx:id="TabPane" prefHeight="372.0" prefWidth="688.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
+         <tabs>
+            <Tab fx:id="tab1" text="Directories">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="154.0" prefWidth="200.0">
+                     <children>
+                        <TitledPane animated="false" collapsible="false" layoutY="14.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <content>
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="618.0">
+                                 <children>
+                                    <TextField fx:id="tfIn" layoutX="122.0" layoutY="24.0" prefHeight="25.0" prefWidth="126.0" AnchorPane.leftAnchor="120.0" AnchorPane.rightAnchor="120.0" AnchorPane.topAnchor="18.0" />
+                                    <Label layoutX="24.0" layoutY="18.0" text="Input Directory" AnchorPane.topAnchor="18.0" />
+                                    <Label layoutX="24.0" layoutY="69.0" text="Output Directory" AnchorPane.topAnchor="46.0" />
+                                    <Button fx:id="btnInPath" layoutX="273.0" layoutY="32.0" mnemonicParsing="false" text="Choose" AnchorPane.rightAnchor="18.0" AnchorPane.topAnchor="18.0" />
+                                    <Button fx:id="btnOutPath" layoutX="283.0" layoutY="74.0" mnemonicParsing="false" text="Choose" AnchorPane.rightAnchor="18.0" AnchorPane.topAnchor="46.0" />
+                                    <TextField fx:id="tfOut" layoutX="122.0" layoutY="65.0" prefHeight="25.0" prefWidth="126.0" AnchorPane.leftAnchor="120.0" AnchorPane.rightAnchor="120.0" AnchorPane.topAnchor="46.0" />
+                                 </children>
+                              </AnchorPane>
+                           </content>
+                        </TitledPane>
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab fx:id="tab2" text="Algorithm">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TitledPane animated="false" collapsible="false" prefHeight="206.0" prefWidth="466.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <content>
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                 <children>
+                                    <ComboBox layoutX="14.0" layoutY="14.0" prefHeight="25.0" prefWidth="557.0" promptText="Hash" AnchorPane.leftAnchor="18.0" AnchorPane.rightAnchor="18.0" AnchorPane.topAnchor="18.0" />
+                                    <Label layoutX="28.0" layoutY="62.0" prefHeight="45.0" prefWidth="541.0" text="The hash algorithm is good for finding exact copies of images. It won't find cropped or filtered versions of the same image though." wrapText="true" AnchorPane.bottomAnchor="18.0" AnchorPane.leftAnchor="18.0" AnchorPane.rightAnchor="18.0" AnchorPane.topAnchor="52.0" />
+                                 </children>
+                              </AnchorPane>
+                           </content>
+                        </TitledPane>
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab fx:id="tab3" text="Advanced">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TitledPane animated="false" collapsible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <content>
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                 <children>
+                                    <CheckBox fx:id="chkExif" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" text="Change file modification time to exif" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="14.0" />
+                                    <CheckBox fx:id="chkSortDate" layoutX="24.0" layoutY="56.0" mnemonicParsing="false" text="Sort images into folders bassed off date" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="42.0" />
+                                    <CheckBox fx:id="chkNoCopy" layoutX="24.0" layoutY="83.0" mnemonicParsing="false" text="Create directory structure, don't copy images" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="70.0" />
+                                 </children>
+                              </AnchorPane>
+                           </content>
+                        </TitledPane>
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab fx:id="tab4" text="Go">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TitledPane animated="false" collapsible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <content>
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                 <children>
+                                    <Label alignment="CENTER" layoutX="300.0" layoutY="105.0" text="All set, press the Go button to start" textAlignment="CENTER" wrapText="true" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                    <ProgressBar layoutX="156.0" layoutY="104.0" prefHeight="18.0" prefWidth="317.0" progress="0.86" AnchorPane.leftAnchor="156.0" AnchorPane.rightAnchor="145.39999999999998" AnchorPane.topAnchor="104.0" />
+                                    <Label layoutX="491.0" layoutY="105.0" text="7 of 9" AnchorPane.rightAnchor="106.0" AnchorPane.topAnchor="105.0" />
+                                 </children>
+                              </AnchorPane>
+                           </content>
+                        </TitledPane>
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+         </tabs>
+      </TabPane>
+   </center>
+   <bottom>
+      <AnchorPane prefHeight="53.0" prefWidth="630.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button fx:id="btnNext" layoutX="475.0" layoutY="89.0" mnemonicParsing="false" text="Next" AnchorPane.rightAnchor="84.0" AnchorPane.topAnchor="14.0" />
+            <Button fx:id="btnPrevious" layoutX="395.0" layoutY="14.0" mnemonicParsing="false" text="Previous" AnchorPane.rightAnchor="138.0" AnchorPane.topAnchor="14.0" />
+            <Button fx:id="btnExit" layoutX="13.0" layoutY="101.0" mnemonicParsing="false" text="Exit" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="14.0" />
+            <Button fx:id="btnGo" layoutX="584.0" layoutY="88.0" mnemonicParsing="false" text="Go" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="14.0" />
+         </children>
+      </AnchorPane>
+   </bottom>
+</BorderPane>
