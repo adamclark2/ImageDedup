@@ -108,9 +108,6 @@ public class JavaFXMainView {
     }
 
     private void initCbox(){
-        // Un implemented functionality
-        CheckBox cbox = (CheckBox) sc.lookup("#chkExif");
-        cbox.setOnAction(notImplemented);
     }
 
     public void btnGo(ActionEvent e){
@@ -124,8 +121,8 @@ public class JavaFXMainView {
         mvc.outputPath = out.getText();
 
         OutputOptions opt = new OutputOptions();
-        opt.useExifTime = false;
-        opt.sortDate = ((CheckBox) sc.lookup("#chkSortDate")).isSelected();;
+        opt.useExifTime = ((CheckBox) sc.lookup("#chkExif")).isSelected();
+        opt.sortDate = ((CheckBox) sc.lookup("#chkSortDate")).isSelected();
         opt.dirsOnly = ((CheckBox) sc.lookup("#chkNoCopy")).isSelected();
 
         mvc.btnBegin(opt,sc);

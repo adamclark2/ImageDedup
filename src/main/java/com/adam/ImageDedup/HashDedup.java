@@ -7,6 +7,10 @@ import java.security.MessageDigest;
 import java.util.*;
 import java.util.function.*;
 
+import com.drew.imaging.*;
+import com.drew.metadata.exif.*;
+import com.drew.metadata.*;
+
 import org.apache.commons.io.FileUtils;
 
 public class HashDedup{
@@ -59,6 +63,16 @@ public class HashDedup{
         return bldr.toString();
     }
 
+    private Calendar getImageModificationDate(File f) throws Exception{
+        Metadata metadata = ImageMetadataReader.readMetadata(f);
+        ExifSubIFDDirectory directory = metadata.getFirstDirectoryOfType(ExifSubIFDDirectory.class);
+        Date date_original = directory.getDateOriginal();
+        Calendar cal_original = Calendar.getInstance();
+        cal_original.setTime(date_original);
+
+        return cal_original;
+    }
+
     private void writeFile(List<File> f, String outputDir, OutputOptions opt, String key) throws Exception{
         String date = "";
         if(opt.sortDate){
@@ -66,6 +80,17 @@ public class HashDedup{
             Calendar c = Calendar.getInstance();
             c.setTimeInMillis(mod);
             date = c.get(Calendar.YEAR) + File.separator;
+            if(opt.useExifTime){
+                String date_old = date;
+                try{
+                    Calendar orig = getImageModificationDate(f.get(0));
+                    if(orig.get(Calendar.YEAR) > 1900){
+                        date = "" + orig.get(Calendar.YEAR) + File.separator;
+                    }
+                }catch (Exception e){
+                    date = date_old;
+                }
+            }
         }
 
         File out = new File(outputDir + date);
@@ -81,7 +106,19 @@ public class HashDedup{
         }
 
         if(!opt.dirsOnly && f.size() == 1){
-            FileUtils.copyFile(f.get(0), new File(outputDir + date + f.get(0).getName()));
+            File to = new File(outputDir + date + f.get(0).getName());
+            File tmp = f.get(0);
+            FileUtils.copyFile(tmp, to);
+            if(opt.useExifTime){
+                try{
+                    to.setLastModified(getImageModificationDate(to).getTimeInMillis());
+                } catch(Exception e){
+                    to.setLastModified(tmp.lastModified());
+                }
+            }else{
+                to.setLastModified(tmp.lastModified());
+            }
+
         }else if(!opt.dirsOnly && f.size() > 1){
             for(File tmp : f){
                 int sep = 0;
@@ -90,6 +127,15 @@ public class HashDedup{
                     to = new File(outputDir + date + key + File.separator + (sep++) + tmp.getName());
                 }
                 FileUtils.copyFile(tmp, to);
+                if(opt.useExifTime){
+                    try{
+                        to.setLastModified(getImageModificationDate(to).getTimeInMillis());
+                    } catch(Exception e){
+                        to.setLastModified(tmp.lastModified());
+                    }
+                }else{
+                    to.setLastModified(tmp.lastModified());
+                }
             }
         }
     }
