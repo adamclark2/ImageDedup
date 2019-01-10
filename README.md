@@ -8,4 +8,4 @@ the images.
 # Running Manually
 
         mvn package
-        java -jar ./target/ImageDedup-1.jar
+        java -jar ./target/ImageDedup-2.jar
