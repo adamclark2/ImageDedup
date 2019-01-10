@@ -3,6 +3,7 @@ package com.adam.ImageDedup.view;
 import com.adam.ImageDedup.*;
 
 import javafx.*;
+import javafx.application.*;
 import javafx.stage.*;
 import javafx.scene.*;
 import javafx.fxml.*;
@@ -19,6 +20,7 @@ public class JavaFXMainView {
     private MainViewController mvc;
     private Scene sc;
     private Stage st;
+    private Application a;
 
     private int tabIndex = 0;
 
@@ -30,10 +32,11 @@ public class JavaFXMainView {
         a.showAndWait();
     };
 
-    public JavaFXMainView(MainViewController mvc, Stage s) throws Exception{
+    public JavaFXMainView(MainViewController mvc, Stage s, Application a) throws Exception{
         this.mvc = mvc;
         this.st = s;
         s.initStyle(StageStyle.DECORATED);
+        this.a = a;
 
         URL gui = ClassLoader.getSystemClassLoader().getResource("MainView.fxml");
         if(gui == null){
@@ -93,6 +96,15 @@ public class JavaFXMainView {
 
         b = (Button) sc.lookup("#btnOutPath");
         b.setOnAction(e -> this.btnOutPath());
+
+        b = (Button) sc.lookup("#btnAbout");
+        b.setOnAction(e -> {
+            try{
+                new JavaFXAbout(a);
+            } catch (Exception ee){
+                ee.printStackTrace();
+            }
+        });
     }
 
     private void initCbox(){

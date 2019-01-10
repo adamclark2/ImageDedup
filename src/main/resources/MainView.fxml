@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 
-<BorderPane prefHeight="336.0" prefWidth="630.0" xmlns="http://javafx.com/javafx/8.0.151" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane prefHeight="336.0" prefWidth="630.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
    <center>
       <TabPane fx:id="TabPane" prefHeight="372.0" prefWidth="688.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
          <tabs>
@@ -83,9 +83,8 @@
                            <content>
                               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                  <children>
-                                    <Label alignment="CENTER" layoutX="300.0" layoutY="105.0" text="All set, press the Go button to start" textAlignment="CENTER" wrapText="true" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-                                    <ProgressBar fx:id="progress" layoutX="175.6" layoutY="123.6" prefHeight="18.0" prefWidth="260.0" progress="0.86" AnchorPane.leftAnchor="166.0" AnchorPane.rightAnchor="202.0" AnchorPane.topAnchor="105.0" />
-                                    <Label fx:id="lbProgress" layoutX="491.0" layoutY="105.0" text="9999 of 9999" AnchorPane.rightAnchor="106.0" AnchorPane.topAnchor="105.0" />
+                                    <ProgressBar fx:id="progress" layoutX="175.6" layoutY="123.6" prefHeight="18.0" prefWidth="260.0" progress="0.86" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="170.0" AnchorPane.topAnchor="105.0" />
+                                    <Label fx:id="lbProgress" layoutX="491.0" layoutY="105.0" text="Press Go To Start" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="105.0" />
                                  </children>
                               </AnchorPane>
                            </content>
@@ -104,6 +103,7 @@
             <Button fx:id="btnPrevious" layoutX="395.0" layoutY="14.0" mnemonicParsing="false" text="Previous" AnchorPane.rightAnchor="138.0" AnchorPane.topAnchor="14.0" />
             <Button fx:id="btnExit" layoutX="13.0" layoutY="101.0" mnemonicParsing="false" text="Exit" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="14.0" />
             <Button fx:id="btnGo" layoutX="584.0" layoutY="88.0" mnemonicParsing="false" text="Go" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="14.0" />
+            <Button fx:id="btnAbout" layoutX="23.0" layoutY="111.0" mnemonicParsing="false" text="About" AnchorPane.leftAnchor="64.0" AnchorPane.topAnchor="14.0" />
          </children>
       </AnchorPane>
    </bottom>

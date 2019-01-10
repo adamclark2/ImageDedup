@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="400.0" minWidth="410.0" prefHeight="400.0" prefWidth="536.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label alignment="CENTER" layoutX="142.0" layoutY="23.0" text="Image Dedup" AnchorPane.leftAnchor="24.0" AnchorPane.rightAnchor="24.0" AnchorPane.topAnchor="24.0">
+         <font>
+            <Font size="32.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" layoutX="152.0" layoutY="33.0" text="V: Beta 2" AnchorPane.leftAnchor="24.0" AnchorPane.rightAnchor="24.0" AnchorPane.topAnchor="64.0" />
+      <Label alignment="CENTER" layoutX="152.0" layoutY="33.0" text="By: Adam Clark" AnchorPane.leftAnchor="24.0" AnchorPane.rightAnchor="24.0" AnchorPane.topAnchor="84.0" />
+      <VBox layoutX="16.0" layoutY="126.0" prefHeight="107.0" prefWidth="285.0" AnchorPane.leftAnchor="24.0" AnchorPane.rightAnchor="24.0" AnchorPane.topAnchor="128.0">
+         <children>
+            <Label text="Remove duplicates of images by grouping into folders." wrapText="true" />
+            <Label text="Optionally sort by date too." />
+            <Label text="Example Output:" />
+            <Label maxWidth="1.7976931348623157E308" style="-fx-background-color: lightgray;" text="&lt;Output Path&gt;/2019" />
+            <Label maxWidth="1.7976931348623157E308" style="-fx-background-color: lightgray;" text="&lt;Output Path&gt;/2019/Hello.png" />
+         </children>
+      </VBox>
+      <Label layoutX="124.0" layoutY="361.0" text="Source Code: " AnchorPane.bottomAnchor="28.0" AnchorPane.rightAnchor="312.0" />
+      <Hyperlink fx:id="lnkSource" layoutX="218.0" layoutY="357.0" prefHeight="25.0" prefWidth="286.0" text="https://github.com/adamclark2/ImageDedup" AnchorPane.bottomAnchor="24.0" AnchorPane.rightAnchor="24.0" />
+   </children>
+</AnchorPane>

@@ -18,7 +18,7 @@ public class JavaFxRunner extends Application
     public void start(Stage s){
         try{
         MainViewController mvc = new MainViewController();
-        JavaFXMainView jfxmv = new JavaFXMainView(mvc, s);
+        JavaFXMainView jfxmv = new JavaFXMainView(mvc, s, this);
         }catch (Exception e){
             e.printStackTrace();
         }
