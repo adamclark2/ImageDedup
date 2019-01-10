@@ -39,8 +39,8 @@ public class JavaFXMainView {
         if(gui == null){
             gui = ClassLoader.getSystemClassLoader().getResource("/MainView.fxml");
         }
+        
         Parent root = FXMLLoader.load(gui);
-
         Scene scene = new Scene(root);
         sc = scene;
         s.setScene(scene);

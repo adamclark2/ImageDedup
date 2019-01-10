@@ -100,7 +100,10 @@ public class HashDedup{
             f.mkdirs();
         }
 
-        outputDir = outputDir + File.separator;
+        if(!outputDir.substring(outputDir.length() - 2).equals(File.separator)){
+            outputDir = outputDir + File.separator;
+        }
+        
         int i = 0;
         int max = dedup.keySet().size();
         for(String key : dedup.keySet()){
