@@ -33,10 +33,14 @@ public class JavaFXMainView {
     public JavaFXMainView(MainViewController mvc, Stage s) throws Exception{
         this.mvc = mvc;
         this.st = s;
-        URL gui = ClassLoader.class.getResource("/MainView.fxml");
-        
         s.initStyle(StageStyle.DECORATED);
+
+        URL gui = ClassLoader.getSystemClassLoader().getResource("MainView.fxml");
+        if(gui == null){
+            gui = ClassLoader.getSystemClassLoader().getResource("/MainView.fxml");
+        }
         Parent root = FXMLLoader.load(gui);
+
         Scene scene = new Scene(root);
         sc = scene;
         s.setScene(scene);
